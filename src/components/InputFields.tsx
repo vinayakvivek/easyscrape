@@ -1,8 +1,7 @@
-import { ScrapeField, useStore } from "~/store";
+import { type ScrapeField, useStore } from "~/store";
 
 const ScrapeFieldItem = ({ id, name, description }: ScrapeField) => {
   const { updateField } = useStore();
-  console.log("render", { id, name });
   return (
     <div className="flex flex-row space-x-4">
       <input
@@ -24,10 +23,10 @@ const ScrapeFieldItem = ({ id, name, description }: ScrapeField) => {
 };
 
 const InputFields = () => {
-  const { fields } = useStore();
+  const { fields, addEmptyField } = useStore();
 
   return (
-    <div className="w-full flex flex-col space-y-4">
+    <div className="flex w-full flex-col space-y-4">
       {fields.map((field) => (
         <ScrapeFieldItem
           key={field.id}
@@ -36,6 +35,12 @@ const InputFields = () => {
           description={field.description}
         />
       ))}
+      <button
+        className="w-fit rounded-full bg-white px-5 py-1 hover:bg-gray-200"
+        onClick={addEmptyField}
+      >
+        Add Field
+      </button>
     </div>
   );
 };

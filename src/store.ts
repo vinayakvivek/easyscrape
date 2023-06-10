@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { v4 as uuidV4 } from "uuid";
 
 export type ScrapeField = {
   id: string;
@@ -10,6 +11,7 @@ type ESState = {
   url: string;
   fields: ScrapeField[];
   addField: (field: ScrapeField) => void;
+  addEmptyField: () => void;
   getField: (id: string) => ScrapeField | undefined;
   updateField: (field: ScrapeField) => void;
 };
@@ -21,6 +23,9 @@ export const useStore = create<ESState>((set, get) => ({
     { id: "2", name: "Test2", description: "Yo2" },
   ],
   addField: (field) => set({ fields: [...get().fields, field] }),
+  addEmptyField: () => {
+    get().addField({ id: uuidV4(), name: "", description: "" });
+  },
   getField: (id) => get().fields.filter((f) => f.id === id)[0],
   updateField: (field) =>
     set({
