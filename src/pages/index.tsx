@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import InputFields from "~/components/InputFields";
 import Output from "~/components/Output";
+import ScrapeButton from "~/components/ScrapeButton";
 import URLInput from "~/components/URLInput";
 
 const Home: NextPage = () => {
@@ -28,9 +29,7 @@ const Home: NextPage = () => {
               <div className="flex basis-2/5 flex-col">
                 <Output />
                 <div className="h-4"/>
-                <button className="w-fit rounded-full bg-white px-5 py-2">
-                  Scrape
-                </button>
+                <ScrapeButton />
               </div>
             </div>
           </div>

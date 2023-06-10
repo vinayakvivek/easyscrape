@@ -1,11 +1,13 @@
+import { useStore } from "~/store";
+
 const Output = () => {
-  const value = "{}";
+  const { result } = useStore();
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       <textarea
-        className="w-full h-full p-4 focus:outline-none"
+        className="h-full w-full p-4 focus:outline-none"
         disabled
-        value={value}
+        value={JSON.stringify(result, null, 2)}
       ></textarea>
     </div>
   );

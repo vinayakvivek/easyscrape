@@ -7,9 +7,16 @@ export type ScrapeField = {
   description: string;
 };
 
+export type Result = {
+  [x: string]: string;
+};
+
 type ESState = {
   url: string;
   fields: ScrapeField[];
+  result: Result;
+  setUrl: (url: string) => void;
+  setResult: (data: Result) => void;
   addField: (field: ScrapeField) => void;
   addEmptyField: () => void;
   removeField: (id: string) => void;
@@ -17,12 +24,27 @@ type ESState = {
   updateField: (field: ScrapeField) => void;
 };
 
+const initialUrl = "https://www.imdb.com/title/tt0120338/";
+const initialFields = [
+  { id: uuidV4(), name: "movie_name", description: "The name of the movie." },
+  {
+    id: uuidV4(),
+    name: "movie_duration",
+    description: "The duration of the movie.",
+  },
+  {
+    id: uuidV4(),
+    name: "movie_rating",
+    description: "The rating of the movie.",
+  },
+];
+
 export const useStore = create<ESState>((set, get) => ({
-  url: "",
-  fields: [
-    { id: "1", name: "Test", description: "Yo" },
-    { id: "2", name: "Test2", description: "Yo2" },
-  ],
+  url: initialUrl,
+  fields: initialFields,
+  result: {},
+  setResult: (data) => set({ result: data }),
+  setUrl: (url) => set({ url }),
   addField: (field) => set({ fields: [...get().fields, field] }),
   addEmptyField: () => {
     get().addField({ id: uuidV4(), name: "", description: "" });
