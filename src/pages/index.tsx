@@ -11,6 +11,11 @@ const Home: NextPage = () => {
       <Head>
         <title>EasyScrape</title>
         <meta name="description" content="Scrape any URL using AI" />
+        {/* enable calling http endpoint: https://stackoverflow.com/a/57646910/13793292 */}
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="min-h-screen bg-gradient-to-b from-[#081370] to-blue-300">
@@ -28,7 +33,7 @@ const Home: NextPage = () => {
               </div>
               <div className="flex basis-2/5 flex-col">
                 <Output />
-                <div className="h-4"/>
+                <div className="h-4" />
                 <ScrapeButton />
               </div>
             </div>
