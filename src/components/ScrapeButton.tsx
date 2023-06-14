@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { EASYSCRAPE_ENDPOINT } from "~/config";
 import { type Result, useStore } from "~/store";
+import LoadingSpinner from "./LoadingSpinner";
 
 const ScrapeButton = () => {
   const { url, fields, setResult } = useStore();
@@ -16,7 +18,7 @@ const ScrapeButton = () => {
       fields,
     });
 
-    fetch("http://139.84.135.59:8080/scrape_fields", {
+    fetch(EASYSCRAPE_ENDPOINT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,10 +37,11 @@ const ScrapeButton = () => {
 
   return (
     <button
-      className="w-fit rounded-full bg-white px-5 py-2"
+      className="w-fit rounded-full bg-white px-5 py-2 flex flex-row space-x-2 items-center"
       disabled={loading}
       onClick={fetchResults}
     >
+      {loading && <LoadingSpinner />}
       {loading ? "Scraping" : "Scrape"}
     </button>
   );
